@@ -2,6 +2,7 @@
 #include <iostream>
 
 int main() {
+    setlocale(LC_ALL, "RU");
     try {
         Game game;
         game.start();
