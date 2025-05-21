@@ -59,22 +59,22 @@ bool Dispatcher::checkSafety(const std::vector<int>& available,
 }
 
 bool Dispatcher::requestResources(int processId, int resourceType, int amount) {
-    // Проверка корректности ввода
+    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
     if (processId < 1 || processId > static_cast<int>(processes.size())) {
-        throw std::out_of_range("Неверный ID процесса");
+        throw std::out_of_range("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ ID пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
     }
 
     if (resourceType < 0 || resourceType >= static_cast<int>(resource->getTotal().size())) {
-        throw std::out_of_range("Неверный тип ресурса");
+        throw std::out_of_range("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
     }
 
     if (amount <= 0) {
-        throw std::invalid_argument("Количество ресурсов должно быть положительным");
+        throw std::invalid_argument("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
     }
 
     auto& process = *processes[processId - 1];
 
-    // Проверка на завершенность процесса и доступность ресурсов
+    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     if (process.isCompleted()) {
         return false;
     }
@@ -83,12 +83,12 @@ bool Dispatcher::requestResources(int processId, int resourceType, int amount) {
         return false;
     }
 
-    // Проверка, что процесс не запрашивает больше, чем ему нужно
+    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
     if (process.getRemainingNeed()[resourceType] < amount) {
         return false;
     }
 
-    // Временное выделение ресурсов для проверки безопасности
+    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     resource->allocate(resourceType, amount);
     std::vector<int> tempAlloc(resource->getTotal().size(), 0);
     tempAlloc[resourceType] = amount;
@@ -96,7 +96,7 @@ bool Dispatcher::requestResources(int processId, int resourceType, int amount) {
 
     bool isSafe = isSafeState();
 
-    // Откат изменений, если состояние небезопасно
+    // пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     if (!isSafe) {
         resource->release(resourceType, amount);
         tempAlloc[resourceType] = -amount;
@@ -119,34 +119,34 @@ void Dispatcher::reset() {
 }
 
 void Dispatcher::printState() const {
-    // Вывод информации о ресурсах
-    std::cout << "\n=== Состояние системы ===" << std::endl;
+    // пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+    std::cout << "\n=== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ ===" << std::endl;
     resource->printStatus();
 
-    // Вывод информации о процессах
-    std::cout << "\nПроцессы:\n";
+    // пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+    std::cout << "\nпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ:\n";
     std::cout << std::setw(10) << "ID"
-        << std::setw(20) << "Выделено"
-        << std::setw(20) << "Осталось"
-        << std::setw(15) << "Статус" << std::endl;
+        << std::setw(20) << "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ"
+        << std::setw(20) << "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ"
+        << std::setw(15) << "пїЅпїЅпїЅпїЅпїЅпїЅ" << std::endl;
 
     for (const auto& process : processes) {
         std::cout << std::setw(10) << process->getId();
 
-        // Выделенные ресурсы
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         std::cout << std::setw(10);
         for (int a : process->getAllocated()) {
             std::cout << a << " ";
         }
 
-        // Оставшиеся потребности
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         std::cout << std::setw(15);
         for (int r : process->getRemainingNeed()) {
             std::cout << r << " ";
         }
 
-        // Статус
-        std::cout << std::setw(15) << (process->isCompleted() ? "Завершен" : "Активен");
+        // пїЅпїЅпїЅпїЅпїЅпїЅ
+        std::cout << std::setw(15) << (process->isCompleted() ? "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ" : "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
         std::cout << std::endl;
     }
 }
@@ -161,7 +161,7 @@ const std::vector<std::shared_ptr<Process>>& Dispatcher::getProcesses() const {
 
 Process& Dispatcher::getProcess(int id) {
     if (id < 1 || id > static_cast<int>(processes.size())) {
-        throw std::out_of_range("Неверный ID процесса");
+        throw std::out_of_range("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ ID пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
     }
     return *processes[id - 1];
 }

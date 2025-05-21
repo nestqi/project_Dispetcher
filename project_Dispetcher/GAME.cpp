@@ -19,7 +19,7 @@ void Game::start() {
     while (true) {
         Utils::clearScreen();
         showMenu();
-        int choice = Utils::getIntInput("Выберите действие: ", 1, 4);
+        int choice = Utils::getIntInput("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ: ", 1, 4);
 
         switch (choice) {
         case 1:
@@ -57,7 +57,7 @@ void Game::nextLevel() {
         score = 0;
     }
     else {
-        std::cout << "\nПоздравляем! Вы прошли все уровни!\n";
+        std::cout << "\nпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ! пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ!\n";
         currentLevel = 0;
     }
 }
@@ -96,26 +96,26 @@ void Game::playLevel() {
         int maxAmount = process.getRemainingNeed()[resourceType];
         int amount = 1 + (maxAmount > 1 ? std::rand() % maxAmount : 0);
 
-        std::cout << "\nЗапрос: Процесс " << processId
-            << " требует " << amount
-            << " единиц Ресурса " << resourceType + 1 << "\n";
+        std::cout << "\nпїЅпїЅпїЅпїЅпїЅпїЅ: пїЅпїЅпїЅпїЅпїЅпїЅпїЅ " << processId
+            << " пїЅпїЅпїЅпїЅпїЅпїЅпїЅ " << amount
+            << " пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ " << resourceType + 1 << "\n";
 
-        int choice = Utils::getIntInput("Выдать ресурсы? (1 - Да, 0 - Нет): ", 0, 1);
+        int choice = Utils::getIntInput("пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ? (1 - пїЅпїЅ, 0 - пїЅпїЅпїЅ): ", 0, 1);
 
         if (choice == 1) {
             if (dispatcher->requestResources(processId, resourceType, amount)) {
-                std::cout << "Ресурсы выданы. Состояние безопасно.\n";
+                std::cout << "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.\n";
                 score += 10;
             }
             else {
-                std::cout << "Ошибка! Выдача приведет к небезопасному состоянию.\n";
+                std::cout << "пїЅпїЅпїЅпїЅпїЅпїЅ! пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.\n";
                 dispatcher->reset();
-                std::cout << "Система сброшена. Попытка #" << ++attempts << "\n";
+                std::cout << "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅ #" << ++attempts << "\n";
                 score = std::max(0, score - 5);
             }
         }
         else {
-            std::cout << "Запрос отклонен.\n";
+            std::cout << "пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.\n";
         }
 
         Utils::pause();
@@ -123,35 +123,35 @@ void Game::playLevel() {
 
     if (dispatcher->isAllProcessesCompleted()) {
         Utils::clearScreen();
-        std::cout << "\nПоздравляем! Все процессы завершены!\n";
-        std::cout << "Ваш счет: " << score << "\n";
-        std::cout << "Количество попыток: " << attempts << "\n";
+        std::cout << "\nпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ! пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ!\n";
+        std::cout << "пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ: " << score << "\n";
+        std::cout << "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ: " << attempts << "\n";
         Utils::pause();
     }
 }
 
 void Game::showMenu() const {
-    std::cout << "\nМеню:\n";
-    std::cout << "1. Начать новый уровень\n";
-    std::cout << "2. Загрузить игру\n";
-    std::cout << "3. Показать статистику\n";
-    std::cout << "4. Выход\n";
+    std::cout << "\nРјРµРЅСЋ:\n";
+    std::cout << "1. пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ\n";
+    std::cout << "2. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ\n";
+    std::cout << "3. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ\n";
+    std::cout << "4. пїЅпїЅпїЅпїЅпїЅ\n";
 }
 
 void Game::showStats() const {
     Utils::clearScreen();
-    std::cout << "\nСтатистика:\n";
-    std::cout << "Текущий уровень: " << currentLevel << " из " << LEVELS.size() << "\n";
-    std::cout << "Счет: " << score << "\n";
-    std::cout << "Всего попыток: " << attempts << "\n";
+    std::cout << "\nпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ:\n";
+    std::cout << "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ: " << currentLevel << " пїЅпїЅ " << LEVELS.size() << "\n";
+    std::cout << "пїЅпїЅпїЅпїЅ: " << score << "\n";
+    std::cout << "пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ: " << attempts << "\n";
     Utils::pause();
 }
 
 void Game::showLevelInfo() const {
     const auto& level = LEVELS[currentLevel - 1];
     std::cout << "\n" << level.description << "\n";
-    std::cout << "Процессов: " << level.processesCount << "\n";
-    std::cout << "Типов ресурсов: " << level.resourcesTypes << "\n";
+    std::cout << "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ: " << level.processesCount << "\n";
+    std::cout << "пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ: " << level.resourcesTypes << "\n";
 }
 
 void Game::saveGame() const {
@@ -177,13 +177,13 @@ void Game::saveGame() const {
 
     std::ofstream file("savegame.json");
     file << gameState.dump(4);
-    std::cout << "Игра сохранена в файл savegame.json\n";
+    std::cout << "пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅ savegame.json\n";
 }
 
 void Game::loadGame() {
     std::ifstream file("savegame.json");
     if (!file.is_open()) {
-        std::cout << "Файл сохранения не найден!\n";
+        std::cout << "пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ!\n";
         return;
     }
 
@@ -221,9 +221,9 @@ void Game::loadGame() {
             }
         }
 
-        std::cout << "Игра успешно загружена!\n";
+        std::cout << "пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ!\n";
     }
     catch (const std::exception& e) {
-        std::cout << "Ошибка загрузки: " << e.what() << "\n";
+        std::cout << "пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ: " << e.what() << "\n";
     }
 }
